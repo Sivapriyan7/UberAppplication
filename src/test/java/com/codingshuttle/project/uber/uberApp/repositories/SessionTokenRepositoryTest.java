@@ -1,18 +1,23 @@
 package com.codingshuttle.project.uber.uberApp.repositories;
 
 import com.codingshuttle.project.uber.uberApp.entities.User;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Import;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
-@SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@Import(TestConfiguration.class)
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class SessionTokenRepositoryTest {
     @Autowired
     private UserRepository userRepository;
@@ -21,8 +26,13 @@ class SessionTokenRepositoryTest {
 
     @Test
     void testcountByUser() {
-        User user = userRepository.findById(41L).get();
+        //Arrange || Given
+        User user = userRepository.findById(1L).get();
+
+        //Act || When
         int session_count = sessionTokenRepository.countByUser(user);
+
+        //Assert || Then
         log.info("session coutn: " + session_count );
     }
 }

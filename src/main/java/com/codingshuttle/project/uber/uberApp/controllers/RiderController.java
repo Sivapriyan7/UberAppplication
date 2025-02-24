@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/riders")
 @RequiredArgsConstructor
 @Secured("ROLE_RIDER")
+@CrossOrigin(origins = "*")
 public class RiderController {
 
     private final RiderService riderService;

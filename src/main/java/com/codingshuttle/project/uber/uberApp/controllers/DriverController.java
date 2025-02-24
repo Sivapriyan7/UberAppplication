@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/drivers")
 @Secured("ROLE_DRIVER")
+@CrossOrigin(origins = "*")
 public class DriverController {
 
     private final DriverService driverService;

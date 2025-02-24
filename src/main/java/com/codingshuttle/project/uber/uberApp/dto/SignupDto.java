@@ -12,6 +12,6 @@ public class SignupDto {
     private String name;
     private String email;
     private String password;
-    private String subscriptiontype;
+    private static String subscriptiontype= "BASIC";
 
 }
