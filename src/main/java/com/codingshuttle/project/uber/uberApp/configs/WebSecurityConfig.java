@@ -1,3 +1,5 @@
+package com.codingshuttle.project.uber.uberApp.configs;
+
 import com.codingshuttle.project.uber.uberApp.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,15 +27,14 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS globally
                 .sessionManagement(sessionConfig ->
                         sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(PUBLIC_ROUTES).permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(PUBLIC_ROUTES).permitAll() // Public routes allowed
+                        .anyRequest().authenticated()) // Other routes require authentication
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
@@ -42,7 +43,7 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Allow all origins
+        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Allow all origins (Change this in production!)
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // Allow cookies & Authorization headers

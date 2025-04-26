@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @Import(TestConfiguration.class)
-@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class SessionTokenRepositoryTest {
     @Autowired

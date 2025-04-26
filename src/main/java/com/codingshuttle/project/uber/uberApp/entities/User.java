@@ -18,44 +18,44 @@ import java.util.stream.Collectors;
 @Table(name = "app_user", indexes = {
         @Index(name = "idx_user_email", columnList = "email")
 })
+
+private String name;
+
+@Column(unique = true)pe.IDENTITY)
+private Long id;
+    }
+
+@Override
+public Collection<? extends GrantedAuthority> getAuthorities() {
+    return roles.stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name()))
+            .collect(Collectors.toSet());
+}
+
+@Override
+
+private String email;
+private String password;
+
+@ElementCollection(fetch = FetchType.EAGER)
+@Enumerated(EnumType.STRING)
+private Set<Role> roles;
+
+@Enumerated(EnumType.STRING)
+private SubscriptionType subscriptionType;
+
+public int getSessionLimit(){
+    return switch (subscriptionType){
+        case FREE -> 1;
+        case BASIC -> 2;
+        case PREMIUM -> 3;
+    };
 @Getter
 @Setter
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-
-    @Column(unique = true)
-    private String email;
-    private String password;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
-
-    @Enumerated(EnumType.STRING)
-    private SubscriptionType subscriptionType;
-
-    public int getSessionLimit(){
-        return switch (subscriptionType){
-            case FREE -> 1;
-            case BASIC -> 2;
-            case PREMIUM -> 3;
-        };
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name()))
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public String getUsername() {
+    @GeneratedValue(strategy = GenerationTy  public String getUsername() {
         return email;
     }
 }

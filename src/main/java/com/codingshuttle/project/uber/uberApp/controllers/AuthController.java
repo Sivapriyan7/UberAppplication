@@ -47,6 +47,9 @@ public class AuthController {
     @PostMapping("/login")
     ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto,
                                            HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+
+        log.info("Login Request - Email: " + loginRequestDto.getEmail() + ", Password: " + loginRequestDto.getPassword());
+
         //GETTING ACCESS TOKEN AND REFRESH TOKEN BY LOGGING IN THE USER
         String tokens[] = authService.login(loginRequestDto.getEmail(), loginRequestDto.getPassword());
 

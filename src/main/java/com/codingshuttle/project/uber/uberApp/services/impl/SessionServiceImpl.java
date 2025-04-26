@@ -17,7 +17,6 @@ public class SessionServiceImpl implements SessionService {
 
     private final SessionTokenRepository sessionTokenRepository;
 
-
     public SessionToken createSession(User user, String refreshToken, Date expiryDate){
         int activeSessions = sessionTokenRepository.countByUser(user);
 

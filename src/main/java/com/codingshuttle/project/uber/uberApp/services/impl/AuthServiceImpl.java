@@ -8,6 +8,7 @@ import com.codingshuttle.project.uber.uberApp.entities.Driver;
 import com.codingshuttle.project.uber.uberApp.entities.User;
 import com.codingshuttle.project.uber.uberApp.entities.Vehicle;
 import com.codingshuttle.project.uber.uberApp.entities.enums.Role;
+import com.codingshuttle.project.uber.uberApp.entities.enums.SubscriptionType;
 import com.codingshuttle.project.uber.uberApp.exceptions.ResourceNotFoundException;
 import com.codingshuttle.project.uber.uberApp.exceptions.RuntimeConflictException;
 import com.codingshuttle.project.uber.uberApp.repositories.UserRepository;
@@ -71,6 +72,7 @@ public class AuthServiceImpl implements AuthService {
 
         User mappedUser = modelMapper.map(signupDto, User.class);
         mappedUser.setRoles(Set.of(Role.RIDER));
+        mappedUser.setSubscriptionType(SubscriptionType.FREE);
         mappedUser.setPassword(passwordEncoder.encode(mappedUser.getPassword()));
         User savedUser = userRepository.save(mappedUser);
 

@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class WalletServiceImpl implements WalletService {
 
-    private  final WalletRepository walletRepository;
+    private final WalletRepository walletRepository;
     private final WalletTransactionService walletTransactionService;
     private final ModelMapper modelMapper;
 
@@ -84,5 +84,6 @@ public class WalletServiceImpl implements WalletService {
     public Wallet findByUser(User user) {
         return walletRepository.findByUser(user)
                 .orElseThrow(()-> new ResourceNotFoundException("wallet not found with id : "+user.getId()));
+
     }
 }

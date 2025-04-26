@@ -1,5 +1,6 @@
 package com.codingshuttle.project.uber.uberApp.dto;
 
+import com.codingshuttle.project.uber.uberApp.entities.enums.SubscriptionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,6 @@ public class SignupDto {
     private String name;
     private String email;
     private String password;
-    private static String subscriptiontype= "BASIC";
+    private static SubscriptionType subscriptiontype = SubscriptionType.FREE;
 
 }
